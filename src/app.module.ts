@@ -5,12 +5,10 @@ import { PostsModule } from './posts/posts.module';
 // import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from "@nestjs/typeorm";
 
-
 @Module({
   imports: [
     PostsModule,
     TypeOrmModule.forRoot()
-    // ConfigModule.forRoot({ isGlobal: true, })
   ],
   controllers: [AppController],
   providers: [AppService],
