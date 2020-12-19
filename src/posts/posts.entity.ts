@@ -1,8 +1,8 @@
 
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-@Entity()
-export class Post {
+@Entity('post')
+export class PostEntity {
   @PrimaryGeneratedColumn('uuid') id: string;
 
   @CreateDateColumn() createdAt: Date;

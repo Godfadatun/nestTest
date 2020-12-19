@@ -1,24 +1,27 @@
-import { PostsService } from './posts.service';
 import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
+
+import { PostsService } from './posts.service';
+import { PostsInterface } from './posts-interface.interface';
 
 @Controller('posts')
 export class PostsController {
   constructor( private readonly postsService: PostsService ) {}
   @Post()
-  createPost(
-      @Body('title') postTitle: string,
-      @Body('content') postContent: string,
-      @Body('sub_header') postSub_header: string,
-      @Body() post
-    ):any {
+  async createPost(
+      // @Body('title') postTitle: string,
+      // @Body('content') postContent: string,
+      // @Body('sub_header') postSub_header: string,
+      @Body() post:PostsInterface
+    ) {
 
-      const thePost = this.postsService.addPost(
-        postTitle,
-        postContent,
-        postSub_header,
-        post.category
+      const thePost = await this.postsService.addPost(
+        // postTitle,
+        // postContent,
+        // postSub_header,
+        // post.category
+        post
       );
-      return {id: thePost}
+      return thePost
   }
 
   @Get()

@@ -1,9 +1,15 @@
+import { HttpsErrorFilter } from './shared/https-error.filter';
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from "@nestjs/typeorm";
+// import { ConfigModule } from '@nestjs/config';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PostsModule } from './posts/posts.module';
-// import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { APP_FILTER } from '@nestjs/core';
+
+
+
 
 @Module({
   imports: [
@@ -11,6 +17,9 @@ import { TypeOrmModule } from "@nestjs/typeorm";
     TypeOrmModule.forRoot()
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, {
+    provide: APP_FILTER,
+    useClass: HttpsErrorFilter
+  }],
 })
 export class AppModule {}
